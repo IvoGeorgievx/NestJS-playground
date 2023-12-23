@@ -1,8 +1,9 @@
-import { Global, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 
-@Global()
 @Injectable()
 export class AuthService {
+  constructor(private prisma: PrismaService) {}
   register() {
     return 'register user';
   }
