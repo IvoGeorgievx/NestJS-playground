@@ -1,8 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
-import * as argon from 'argon2';
 import { ConfigService } from '@nestjs/config';
+import * as argon from 'argon2';
 
 import { AuthDto } from './dto';
 
@@ -22,7 +22,10 @@ export class AuthService {
                     hash,
                 },
             });
-            return this.signToken(user.id, user.email);
+            const token = await this.signToken(user.id, user.email);
+            return {
+                token: token,
+            };
         } catch (error) {
             if (error.code === 'P2002') {
                 // P2002 = unique constraint failed
@@ -44,8 +47,10 @@ export class AuthService {
         if (!isPasswordValid) {
             throw new ForbiddenException('Wrong email or password');
         }
-        delete user.hash;
-        return this.signToken(user.id, user.email);
+        const token = await this.signToken(user.id, user.email);
+        return {
+            token: token,
+        };
     }
 
     async signToken(userId: number, email: string): Promise<string> {
