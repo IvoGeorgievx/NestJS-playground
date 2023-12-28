@@ -7,6 +7,7 @@ async function bootstrap() {
         snapshot: true,
     });
     app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+    app.enableCors();
     await app.listen(3007);
 }
 bootstrap();
