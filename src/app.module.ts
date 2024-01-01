@@ -4,11 +4,12 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { DevtoolsModule } from '@nestjs/devtools-integration';
-import { LoggerMiddleware } from 'middlewares/logger.middleware';
-import { ValidateUserMiddleware } from 'middlewares/validateUser.middleware';
-import { AuthMiddleware } from 'middlewares/auth.middleware';
+import { LoggerMiddleware } from 'src/middlewares/logger.middleware';
+import { ValidateUserMiddleware } from 'src/middlewares/validateUser.middleware';
+import { AuthMiddleware } from 'src/middlewares/auth.middleware';
 
 import { protectedRoutes } from './protected.routes';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import { protectedRoutes } from './protected.routes';
         ConfigModule.forRoot({
             isGlobal: true,
         }),
+        TodoModule,
     ],
     controllers: [],
     providers: [],
