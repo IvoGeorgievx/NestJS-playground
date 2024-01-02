@@ -10,6 +10,7 @@ import { AuthMiddleware } from 'src/middlewares/auth.middleware';
 
 import { protectedRoutes } from './protected.routes';
 import { TodoModule } from './todo/todo.module';
+import { GraphqlModule } from './graphql/graphql.module';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { TodoModule } from './todo/todo.module';
             isGlobal: true,
         }),
         TodoModule,
+        GraphqlModule,
     ],
     controllers: [],
     providers: [],
