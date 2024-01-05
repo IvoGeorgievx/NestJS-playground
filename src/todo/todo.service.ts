@@ -13,4 +13,16 @@ export class TodoService {
         });
         return todos;
     }
+
+    async markAsDone(todoId: number) {
+        const todo = await this.prisma.todo.update({
+            where: {
+                id: todoId,
+            },
+            data: {
+                completed: true,
+            },
+        });
+        return todo;
+    }
 }
