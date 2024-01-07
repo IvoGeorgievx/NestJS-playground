@@ -14,6 +14,19 @@ export class TodoService {
         return todos;
     }
 
+    async createTodo(
+        userId: number,
+        data: { title: string; description?: string },
+    ) {
+        const todo = await this.prisma.todo.create({
+            data: {
+                ...data,
+                userId,
+            },
+        });
+        return todo;
+    }
+
     async markAsDone(todoId: number) {
         const todo = await this.prisma.todo.update({
             where: {
