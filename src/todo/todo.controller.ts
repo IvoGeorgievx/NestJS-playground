@@ -33,11 +33,12 @@ export class TodoController {
         return this.todoService.markAsDone(+todoId);
     }
 
-    // @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard)
     @Post('create')
     createTodo(@Req() req: Request & { user: User }) {
+        console.log(req.user.id);
         const userId = req.user.id;
-        const { title, description } = req.body;
-        return this.todoService.createTodo(userId, { title, description });
+        const { title } = req.body;
+        return this.todoService.createTodo(userId, { title });
     }
 }
