@@ -4,20 +4,17 @@ WORKDIR /usr/src/app
 
 COPY ./playground/package*.json ./
 
-RUN npm install --target_arch=x64 --target_platform=linux --target_libc=glibc
-
 RUN npm install
-
-RUN npm rebuild argon2
-
-RUN npm install -g prisma
-
-COPY ./playground .
 
 COPY ./prisma ./prisma/
 
+COPY ./playground .
+
+COPY .env .
+
 RUN npx prisma generate
+RUN npm install -g prisma
 
 EXPOSE 3007
 
-CMD npx prisma migrate dev --name init && npm run start:dev
+CMD rm -rf node_modules && npm install && npx prisma migrate deploy && npm run start:dev

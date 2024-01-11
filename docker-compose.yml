@@ -7,7 +7,10 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL_DOCKER}
+    volumes:
+      - ./playground:/usr/src/app/playground:rw
+      - ./prisma:/usr/src/app/prisma
 
   db:
     image: postgres:latest
