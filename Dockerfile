@@ -10,9 +10,10 @@ COPY ./prisma ./prisma/
 
 COPY ./playground .
 
-COPY .env .
+COPY .env ./
 
 RUN npx prisma generate
+
 RUN npm install -g prisma
 
 EXPOSE 3007
